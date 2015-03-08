@@ -10,7 +10,7 @@ var gulp 	= require('gulp'),
     argv    = require('yargs').argv;
 
 var releaseVersion = argv.release;
-
+var isRelease = !(!releaseVersion);
 var paths = {
 	packages: 'src/',
 	dest: 'build/',
@@ -47,8 +47,8 @@ gulp.task('minified', function(){
 			.pipe(concat(folder+'.min.js'))
 			.pipe(uglify())			
 			.pipe(gulp.dest(paths.unstable))
-			.pipe(gulpif(releaseVersion, gulp.dest(path.join(paths.dest, releaseFolder))))
-			.pipe(gulpif(releaseVersion, gulp.dest(path.join(paths.dest, 'latest'))));
+			.pipe(gulpif(isRelease, gulp.dest(path.join(paths.dest, releaseFolder))))
+			.pipe(gulpif(isRelease, gulp.dest(path.join(paths.dest, 'latest'))));
 
 	});
 
@@ -76,8 +76,8 @@ gulp.task('nonminified', function(){
 		return gulp.src(scripts)
 			.pipe(concat(folder+'.js'))
 			.pipe(gulp.dest(paths.unstable))
-			.pipe(gulpif(releaseVersion, gulp.dest(path.join(paths.dest, releaseFolder))))
-			.pipe(gulpif(releaseVersion, gulp.dest(path.join(paths.dest, 'latest'))));
+			.pipe(gulpif(isRelease, gulp.dest(path.join(paths.dest, releaseFolder))))
+			.pipe(gulpif(isRelease, gulp.dest(path.join(paths.dest, 'latest'))));
 	});
 
 	return merge(tasks);
