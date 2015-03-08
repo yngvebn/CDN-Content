@@ -1,0 +1,28 @@
+{
+  "name": "CDN-Content",
+  "version": "1.0.0",
+  "description": "Holds shared content for cdn.bakken-nilsen.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yngvebn/CDN-Content"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yngvebn/CDN-Content/issues"
+  },
+  "homepage": "https://github.com/yngvebn/CDN-Content",
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-flatten": "0.0.4",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.1.0",
+    "merge-stream": "^0.1.7",
+    "yargs": "^3.4.5"
+  }
+}
