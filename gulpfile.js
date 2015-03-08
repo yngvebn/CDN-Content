@@ -6,13 +6,15 @@ var gulp 	= require('gulp'),
 	uglify 	= require('gulp-uglify'),
 	flatten	= require('gulp-flatten'),
 	merge	= require('merge-stream'),
+	gulpif 	= require('gulp-if'),
     argv    = require('yargs').argv;
 
 var releaseVersion = argv.release;
 
 var paths = {
 	packages: 'src/',
-	dest: 'build/'
+	dest: 'build/',
+	unstable: 'build/unstable/'
 }
 
 function getFolders(dir) {
@@ -43,9 +45,10 @@ gulp.task('minified', function(){
 			path.join(paths.packages, folder, '/**/*.js')];
 		return gulp.src(scripts)
 			.pipe(concat(folder+'.min.js'))
-			.pipe(uglify())
-			.pipe(gulp.dest(path.join(paths.dest, releaseFolder)))
-			.pipe(gulp.dest(path.join(paths.dest, 'latest')));
+			.pipe(uglify())			
+			.pipe(gulp.dest(paths.unstable))
+			.pipe(gulpif(releaseVersion, gulp.dest(path.join(paths.dest, releaseFolder))))
+			.pipe(gulpif(releaseVersion, gulp.dest(path.join(paths.dest, 'latest'))));
 
 	});
 
@@ -72,9 +75,9 @@ gulp.task('nonminified', function(){
 			path.join(paths.packages, folder, '/**/*.js')];
 		return gulp.src(scripts)
 			.pipe(concat(folder+'.js'))
-			.pipe(gulp.dest(path.join(paths.dest, releaseFolder)))
-			.pipe(gulp.dest(path.join(paths.dest, 'latest')));
-
+			.pipe(gulp.dest(paths.unstable))
+			.pipe(gulpif(releaseVersion, gulp.dest(path.join(paths.dest, releaseFolder))))
+			.pipe(gulpif(releaseVersion, gulp.dest(path.join(paths.dest, 'latest'))));
 	});
 
 	return merge(tasks);
