@@ -5,6 +5,7 @@ var gulp 		= require('gulp'),
 	concat		= require('gulp-concat'),
 	runSequence	= require('run-sequence'),
 	rimraf		= require('gulp-rimraf'),
+	babel		= require('gulp-babel'),
 	uglify 		= require('gulp-uglify'),
 	flatten		= require('gulp-flatten'),
 	merge		= require('merge-stream'),
@@ -53,6 +54,7 @@ gulp.task('minified', function(){
 			[path.join(paths.packages, folder, '/**/*module.js'),
 			path.join(paths.packages, folder, '/**/*.js')];
 		return gulp.src(scripts)
+			.pipe(babel())
 			.pipe(concat(folder+'.min.js'))
 			.pipe(uglify())			
 			.pipe(gulp.dest(paths.unstable))
@@ -83,7 +85,9 @@ gulp.task('nonminified', function(){
 			[path.join(paths.packages, folder, '/**/*module.js'),
 			path.join(paths.packages, folder, '/**/*.js')];
 		return gulp.src(scripts)
+			.pipe(babel())
 			.pipe(concat(folder+'.js'))
+			
 			.pipe(gulp.dest(paths.unstable))
 			.pipe(gulpif(isRelease, gulp.dest(path.join(paths.dest, releaseFolder))))
 			.pipe(gulpif(isRelease, gulp.dest(path.join(paths.dest, 'latest'))));

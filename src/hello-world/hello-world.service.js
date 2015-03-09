@@ -1,14 +1,13 @@
 (function() {
 	
-    function HelloWorld() {
-        return {
-            greet: greet
-        };
+    class HelloWorld {
+        constructor(){
 
-        function greet() {
-            return 'Hello world!';
+        }
+        greet(){
+            return "Hello world!";
         }
     }
 
-    angular.module('hello-world').factory('helloWorld', HelloWorld);
+    angular.module('hello-world').service('helloWorld', HelloWorld);
 }());
