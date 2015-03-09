@@ -24,6 +24,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^1.1.0",
     "merge-stream": "^0.1.7",
-    "yargs": "^3.4.5"
+    "yargs": "^3.4.5",
+    "gulp-rimraf": "~0.1.1"
   }
 }

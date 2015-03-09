@@ -3,6 +3,7 @@ var gulp 	= require('gulp'),
 	path	= require('path'),
 	rename 	= require('gulp-rename'),
 	concat	= require('gulp-concat'),
+	rimraf	= require('gulp-rimraf'),
 	uglify 	= require('gulp-uglify'),
 	flatten	= require('gulp-flatten'),
 	merge	= require('merge-stream'),
@@ -24,7 +25,12 @@ function getFolders(dir) {
       });
 }
 
-gulp.task('default', ['minified', 'nonminified']);
+gulp.task('default', ['clean', 'minified', 'nonminified']);
+
+gulp.task('clean', function(cb){
+	return gulp.src(paths.dest, { read: false })
+		.pipe(rimraf({force: true}));
+})
 
 gulp.task('minified', function(){
 	var releaseFolder = 'latest';
