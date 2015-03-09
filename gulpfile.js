@@ -1,14 +1,15 @@
-var gulp 	= require('gulp'),
-	fs 		= require('fs'),
-	path	= require('path'),
-	rename 	= require('gulp-rename'),
-	concat	= require('gulp-concat'),
-	rimraf	= require('gulp-rimraf'),
-	uglify 	= require('gulp-uglify'),
-	flatten	= require('gulp-flatten'),
-	merge	= require('merge-stream'),
-	gulpif 	= require('gulp-if'),
-    argv    = require('yargs').argv;
+var gulp 		= require('gulp'),
+	fs 			= require('fs'),
+	path		= require('path'),
+	rename 		= require('gulp-rename'),
+	concat		= require('gulp-concat'),
+	runSequence	= require('run-sequence'),
+	rimraf		= require('gulp-rimraf'),
+	uglify 		= require('gulp-uglify'),
+	flatten		= require('gulp-flatten'),
+	merge		= require('merge-stream'),
+	gulpif 		= require('gulp-if'),
+    argv    	= require('yargs').argv;
 
 var releaseVersion = argv.release;
 var isRelease = !(!releaseVersion);
@@ -25,7 +26,9 @@ function getFolders(dir) {
       });
 }
 
-gulp.task('default', ['clean', 'minified', 'nonminified']);
+gulp.task('default', function(callback){
+	runSequence('clean', ['minified', 'nonminified'], callback);
+});
 
 gulp.task('clean', function(cb){
 	return gulp.src(paths.dest, { read: false })
