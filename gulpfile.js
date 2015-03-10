@@ -52,7 +52,7 @@ gulp.task('minified', function(){
 	var tasks = folders.map(function(folder){
 		var scripts = 
 			[path.join(paths.packages, folder, '/**/*module.js'),
-			path.join(paths.packages, folder, '/**/*.js')];
+			path.join(paths.packages, folder, '/**/*.js', '!/**/*.spec.js')];
 		return gulp.src(scripts)
 			.pipe(babel())
 			.pipe(concat(folder+'.min.js'))
@@ -83,7 +83,7 @@ gulp.task('nonminified', function(){
 	var tasks = folders.map(function(folder){
 		var scripts = 
 			[path.join(paths.packages, folder, '/**/*module.js'),
-			path.join(paths.packages, folder, '/**/*.js')];
+			path.join(paths.packages, folder, '/**/*.js'), '!/**/*.spec.js'];
 		return gulp.src(scripts)
 			.pipe(babel())
 			.pipe(concat(folder+'.js'))
