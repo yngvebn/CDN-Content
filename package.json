@@ -28,7 +28,6 @@
     "gulp-rimraf": "~0.1.1",
     "run-sequence": "~1.0.2",
     "gulp-babel": "~4.0.0",
-    "karma": "~0.12.31",
     "karma-cli": "0.0.4",
     "karma-phantomjs-launcher": "~0.1.4",
     "karma-teamcity-reporter": "~0.1.2",
